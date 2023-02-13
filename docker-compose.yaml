@@ -1,0 +1,10 @@
+version: "3.3"
+services:
+  todolist-aspnetcore-dockerized:
+    container_name: todolist-aspnetcore-dockerized
+    restart: always
+    build: 
+      context: .
+      dockerfile: ./todolist-aspnetcore/Dockerfile
+    ports:
+      - "5005:5000"
