@@ -1,10 +1,27 @@
 version: "3.3"
 services:
+  mssql:
+    container_name: mssql
+    restart: always
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    volumes: 
+      - "mssql_data:/var/opt/mssql"
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=sTroNk123Pass!!!
+      - NAME=mssqldb
+      - HOSTNAME=mssqldb
   todolist-aspnetcore-dockerized:
     container_name: todolist-aspnetcore-dockerized
+    depends_on:
+      - "mssql"
     restart: always
     build: 
       context: .
       dockerfile: ./todolist-aspnetcore/Dockerfile
     ports:
       - "5005:5000"
+volumes:
+  mssql_data:

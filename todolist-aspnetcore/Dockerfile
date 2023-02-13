@@ -3,8 +3,6 @@ WORKDIR /app
 
 COPY /todolist-aspnetcore ./todolist-aspnetcore
 
-EXPOSE 5001
-
 RUN dotnet publish todolist-aspnetcore/todolist-aspnetcore.csproj -c Release -o ./out
 
 WORKDIR /app/out
