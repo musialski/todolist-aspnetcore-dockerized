@@ -1,0 +1,15 @@
+﻿@model todolistaspnetcore.Models.ToDoPosition
+
+@{
+    ViewData["Title"] = "Usuwanie zadania";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h3>@Model.Description</h3>
+
+<hr />
+
+<form asp-action="Delete">
+    <input asp-for="Id" type="hidden" value="@Model.Id" />
+    <input type="submit" value="Usuń" class="btn btn-danger" />
+</form>

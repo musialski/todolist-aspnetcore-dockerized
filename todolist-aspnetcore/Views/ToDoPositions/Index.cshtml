@@ -1,0 +1,42 @@
+﻿@using todolistaspnetcore.Models
+@model IEnumerable<todolistaspnetcore.Models.ToDoPosition>
+
+@{
+    ViewData["Title"] = "Twoje zadania";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Zadanie</th>
+            <th>Akcja</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (ToDoPosition position in Model) 
+{
+        <tr>
+            <td>
+                    @position.Description
+            </td>
+            <td>
+                    @Html.ActionLink("✏️", "Edit", 
+                        new { id = position.Id }, 
+                        new { @class= "text-decoration-none" })
+
+                    |
+
+                    @Html.ActionLink("🗑", "Delete", 
+                        new { id = position.Id }, 
+                        new { @class= "text-decoration-none" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary mt-2">Dodaj zadanie</a>
+</p>
