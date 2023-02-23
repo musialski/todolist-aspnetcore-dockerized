@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using todolistaspnetcore.DAL;
+using todolistaspnetcore.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ builder.Services.AddDbContext<MyDbContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IRepo, Repo>();
+builder.Services.AddScoped<ICacheService, CacheService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

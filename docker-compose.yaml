@@ -13,10 +13,21 @@ services:
       - MSSQL_SA_PASSWORD=sTroNk123Pass!!!
       - NAME=mssqldb
       - HOSTNAME=mssqldb
+  redis:
+    container_name: redis
+    image: redis
+    volumes:
+     - "redis_data:/data"
+     - "./redis.conf:/usr/local/etc/redis/redis.conf"
+    command: redis-server /usr/local/etc/redis/redis.conf
+    ports:
+     - "7001:6379"
+    restart: always
   todolist-aspnetcore-dockerized:
     container_name: todolist-aspnetcore-dockerized
     depends_on:
       - "mssql"
+      - "redis"
     restart: always
     build: 
       context: .
@@ -25,3 +36,4 @@ services:
       - "5005:5000"
 volumes:
   mssql_data:
+  redis_data:
